@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Blog</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        'casual-bg': '#e6ebe0',      
+                        'casual-card': '#ffffff',    
+                        'casual-border': '#333333',  
+                        'casual-accent': '#9bc1bc',  
+                        'casual-text': '#4a4a4a',    
+                        'casual-header': '#edafb8',  
+                    },
+                    boxShadow: {
+                        'retro': '4px 4px 0px 0px rgba(51, 51, 51, 1)', 
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #e6ebe0;
+            background-image: 
+                linear-gradient(90deg, rgba(200, 200, 200, 0.3) 1px, transparent 1px),
+                linear-gradient(rgba(200, 200, 200, 0.3) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* --- FIXED MOBILE MENU CSS --- */
+        #mobile-menu {
+            transition: all 0.3s ease-in-out;
+            overflow: hidden;
+            max-height: 0;
+            border-width: 0; 
+            box-shadow: none;
+            opacity: 0;
+            margin-bottom: 0;
+        }
+        
+        #mobile-menu.open {
+            max-height: 250px;
+            border-width: 2px;
+            box-shadow: 4px 4px 0px 0px rgba(51, 51, 51, 1);
+            opacity: 1;
+            margin-bottom: 1rem; 
+        }
+    </style>
+</head>
+<body class="font-sans text-casual-text p-4 md:p-8 min-h-screen flex flex-col items-center">
+
+    <div class="w-full max-w-4xl flex justify-between items-stretch mb-4 md:hidden">
+        
+        <div id="mobile-clock" class="flex-grow flex items-center justify-center border-2 border-casual-border bg-white shadow-retro mr-4 px-2 text-sm font-bold tracking-tight uppercase">
+            </div>
+
+        <button onclick="toggleMenu()" class="border-2 border-casual-border bg-white p-2 shadow-retro active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-casual-border" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
+    </div>
+
+    <div id="mobile-menu" class="w-full max-w-4xl md:hidden bg-white border-casual-border">
+        <ul class="flex flex-col text-center font-semibold">
+            <li><a href="#home" onclick="toggleMenu()" class="block py-2 hover:bg-casual-header hover:text-white transition-colors border-b border-gray-100">Home</a></li>
+            <li><a href="#about" onclick="toggleMenu()" class="block py-2 hover:bg-casual-header hover:text-white transition-colors border-b border-gray-100">About Me</a></li>
+            <li><a href="#blog" onclick="toggleMenu()" class="block py-2 hover:bg-casual-header hover:text-white transition-colors">Blog Posts</a></li>
+        </ul>
+    </div>
+
+    <div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-4 gap-6">
+
+        <header id="home" class="col-span-1 md:col-span-4 border-2 border-casual-border bg-white p-8 text-center shadow-retro">
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-casual-border">assalamualaikum wr. wb.</h1>
+            <p class="mt-2 text-lg italic text-gray-500">raiyiz abdullah machfud 9A/26</p>
+        </header>
+
+        <aside class="hidden md:flex flex-col gap-6 col-span-1">
+            <nav class="border-2 border-casual-border bg-white p-4 shadow-retro sticky top-8">
+                <h3 class="font-bold text-xl mb-3 border-b-2 border-casual-border pb-1">Menu</h3>
+                <ul class="space-y-2 font-medium">
+                    <li><a href="#home" class="block hover:text-casual-accent hover:translate-x-1 transition-transform">Home</a></li>
+                    <li><a href="#about" class="block hover:text-casual-accent hover:translate-x-1 transition-transform">About Me</a></li>
+                    <li><a href="#blog" class="block hover:text-casual-accent hover:translate-x-1 transition-transform">Blog Posts</a></li>
+                </ul>
+            </nav>
+
+            <div class="border-2 border-casual-border bg-white p-4 shadow-retro aspect-square flex items-center justify-center">
+                <img src="image.png" alt="Side Image" class="">
+            </div>
+        </aside>
+
+        <main class="col-span-1 md:col-span-3 flex flex-col gap-6">
+            
+            <article id="blog" class="border-2 border-casual-border bg-white p-6 shadow-retro scroll-mt-4">
+                <h2 class="text-3xl font-bold text-casual-border">Pengalamanku di SPEGA</h2>
+                <div class="text-sm text-gray-500 border-b-2 border-gray-200 pb-2 mb-4 mt-1">
+                    11 Desember, 2025 oleh Raiyiz Abdullah
+                </div>
+
+                <div class="w-full aspect-video border-2 border-casual-border bg-black mb-6">
+                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/qnbwUiSudIk?si=_bJiTL4Wm8WYW5G3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+
+                <div id="blog-content" class="prose prose-stone max-w-none">
+                </div>
+            </article>
+
+            <section id="about" class="border-2 border-casual-border bg-white p-6 shadow-retro scroll-mt-4">
+                <h2 class="text-2xl font-bold mb-4 border-b-2 border-gray-200 pb-2">Tentang Diriku</h2>
+                
+
+                <div id="about-content" class="prose prose-stone max-w-none">
+                </div>
+
+                <br>
+
+                <div class="md:hidden w-full flex justify-center mb-6">
+                    <div class="w-full h-full border-2 border-casual-border bg-white p-2 shadow-retro">
+                        <img src="image.png" alt="Fotoku" class="w-full h-full object-cover">
+                    </div>
+                </div>
+
+                <b>terimakasih itu aja</b>
+
+            </section>
+
+        </main>
+
+        <footer class="col-span-1 md:col-span-4 mt-4 border-2 border-casual-border bg-[#d1d5db] p-6 text-center shadow-retro">
+            <h3 class="text-xl font-bold text-casual-border">sekian wassalamualaikum wr. wb.</h3>
+            <p class="text-sm mt-1 text-gray-600">untuk tugas TIK 2025</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // --- 1. MENU FUNCTION ---
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('open');
+        }
+
+        // --- 2. MARKDOWN CONTENT ---
+        const blogMarkdown = `
+SPEGA itu seru parah jir aku suka banget sekolah di **SPEGA** soalnya banyak banget hal seru yang aku lakuin di sekolah ini contohnya mabar pas jamkos 
+
+next year dan tahun depannya **(2027)** hopefully semoga aku tetep di **SPEGA** soalnya emang segitu serunya jir 
+
+* jadwal aseks
+* temen aseks
+* guru aseks
+`;
+
+        const aboutMarkdown = `
+halo kawan aseks aku **Raiyiz Abdullah Machfud** biasa dipanggil Rayis atau Raiyiz
+aku murid kelas **9A absen 26** di SMP NEGERI 3 SURABAYA yagesya
+
+aku ciri cirinya:
+1. hitam
+2. suka efootball
+3. suka freefire
+4. hobi mancal (mancal + ngopag pagi)
+`;
+
+        document.getElementById('blog-content').innerHTML = marked.parse(blogMarkdown);
+        document.getElementById('about-content').innerHTML = marked.parse(aboutMarkdown);
+
+        // --- 3. CLOCK FUNCTION ---
+        function updateClock() {
+            const now = new Date();
+            // Format: 11 Dec 25 • 14:30:05
+            const dateStr = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: '2-digit' });
+            const timeStr = now.toLocaleTimeString('id-ID', { hour12: false });
+            
+            const clockEl = document.getElementById('mobile-clock');
+            if(clockEl) {
+                clockEl.innerText = `${dateStr} • ${timeStr}`;
+            }
+        }
+
+        // Run immediately, then update every second
+        updateClock(); 
+        setInterval(updateClock, 1000);
+
+    </script>
+</body>
+</html>
